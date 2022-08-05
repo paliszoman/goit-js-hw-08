@@ -9,7 +9,7 @@ let submitForm = (event) => {
         console.log(`Send mail to: ${email.value}, message is: ${message.value}`);
         event.currentTarget.reset();
     }
-    
+   
 }
 
 let formData = (event) => { 
@@ -20,7 +20,6 @@ let formData = (event) => {
         messageData: message.value
     }
     localStorage.setItem('feedback-form-state', JSON.stringify(input));
-   
 }
 
 let loadStorage = () => { 
@@ -37,9 +36,6 @@ let loadStorage = () => {
     }
   
 };
-
-
-
 
 
 let form = document.querySelector('.feedback-form')
