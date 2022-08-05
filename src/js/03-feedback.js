@@ -35,6 +35,7 @@ let loadStorage = () => {
             console.error("Get state error: ", error.message);
         }
     }
+  
 };
 
 
@@ -42,8 +43,9 @@ let loadStorage = () => {
 
 
 let form = document.querySelector('.feedback-form')
+let throttled = throttle(function () { loadStorage() }, 500);
 
 form.addEventListener('submit', submitForm);
-form.addEventListener('input', formData);
-loadStorage()
+form.addEventListener('input',  formData );
+throttled()
 
