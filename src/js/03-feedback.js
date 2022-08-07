@@ -6,7 +6,15 @@ const textMessage = document.querySelector('textarea')
 const savedData = localStorage.getItem("feedback-form-state");
 const parsedData = JSON.parse(savedData);
 
-let submitForm = (event) => { 
+form.addEventListener('input',  throttle(() => { 
+    const input = {
+        emailData: form.elements.email.value,
+        messageData: form.elements.message.value
+    };
+    localStorage.setItem('feedback-form-state', JSON.stringify(input));
+}, 500));
+
+form.addEventListener('submit', (event) => { 
     event.preventDefault();
     let { elements: { email, message } } = event.currentTarget;
     if (email.value == '' || message.value == '') { alert("Please fill in all the fields!") }
@@ -15,16 +23,8 @@ let submitForm = (event) => {
         event.currentTarget.reset();
         localStorage.clear();
     }
-}
+});
 
-let formData = (event) => { 
-    let { elements: { email, message } } = event.currentTarget;
-    let input = {
-        emailData: email.value,
-        messageData: message.value
-    }
-    localStorage.setItem('feedback-form-state', JSON.stringify(input));
-}
 
 let loadStorage = () => { 
     if (savedData !== null) {
@@ -36,7 +36,5 @@ let loadStorage = () => {
         }
     }
 };
-form.addEventListener('input',  throttle(formData , 500));
-form.addEventListener('submit', submitForm);
 loadStorage()
 
